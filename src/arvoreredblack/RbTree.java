@@ -59,20 +59,20 @@ class RbTree {
             if (pai == avo.getLeft()) {
                 Node tio = avo.getRight();
 
-                // Caso 1: tio vermelho → recoloração
+                // Caso 1: tio vermelho: recoloração
                 if (tio != null && tio.isRed()) {
                     pai.setRed(false);
                     tio.setRed(false);
                     avo.setRed(true);
                     novo = avo;
                 } else {
-                    // Caso 2: nó é filho direito → rotação esquerda
+                    // Caso 2: nó é filho direito: rotação esquerda
                     if (novo == pai.getRight()) {
                         novo = pai;
                         rotacaoEsquerda(novo);
                         pai = novo.getParent();
                     }
-                    // Caso 3: nó é filho esquerdo → rotação direita
+                    // Caso 3: nó é filho esquerdo: rotação direita
                     pai.setRed(false);
                     avo.setRed(true);
                     rotacaoDireita(avo);
@@ -186,9 +186,8 @@ class RbTree {
         }
     }
 
-    // ---------------------------------------------------
-    // MÉTODO PARA "TRANSPLANTAR" NÓS (substitui um nó por outro)
-    // ---------------------------------------------------
+    
+    // MÉTODO PARA substitui um nó por outro
     private void transplantar(Node u, Node v) {
         if (u.getParent() == null) {
             root = v; // se u era a raiz, v vira a nova raiz
@@ -203,9 +202,7 @@ class RbTree {
         }
     }
 
-    // ---------------------------------------------------
     // CORREÇÃO APÓS REMOÇÃO (caso o nó removido fosse preto)
-    // ---------------------------------------------------
     private void corrigirRemocao(Node x) {
     // Enquanto não for raiz e (x é preto ou nulo)
     while (x != root && (x == null || !x.isRed())) {
@@ -290,9 +287,8 @@ class RbTree {
 }
 
 
-    // ---------------------------------------------------
+
     // FUNÇÃO AUXILIAR: BUSCA DE UM NÓ PELO VALOR
-    // ---------------------------------------------------
     private Node buscarNode(Node raiz, int valor) {
         while (raiz != null) {
             if (valor < raiz.getInfo()) raiz = raiz.getLeft();
@@ -302,9 +298,7 @@ class RbTree {
         return null;
     }
 
-    // ---------------------------------------------------
     // FUNÇÃO AUXILIAR: ENCONTRA O MENOR NÓ (SUCESSOR)
-    // ---------------------------------------------------
     private Node minimo(Node no) {
         while (no.getLeft() != null) {
             no = no.getLeft();
